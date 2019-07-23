@@ -1,0 +1,15 @@
+name: lib_colors
+description: Cross-platform Dart library to create, use, convert and manipulate colors.
+version: 1.0.0
+homepage: https://github.com/tejainece/lib_colors
+author: Ravi Teja Gudapati <tejainece@gmail.com>
+
+environment:
+  sdk: '>=2.4.0 <3.0.0'
+
+#dependencies:
+#  path: ^1.6.0
+
+dev_dependencies:
+  pedantic: ^1.7.0
+  test: ^1.6.0
