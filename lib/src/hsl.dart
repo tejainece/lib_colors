@@ -2,6 +2,7 @@ import 'package:lib_colors/src/utils/num.dart';
 
 import 'lib_colors.dart';
 import 'rgb.dart';
+import 'hsv.dart';
 
 class Hsl implements Color {
   double _h;
@@ -72,6 +73,70 @@ class Hsl implements Color {
     _a = v.toDouble();
   }
 
+  void assignRgb(Rgb rgb) {
+    assignHsl(rgb.toHsl);
+  }
+
+  void assignHsl(Hsl hsl) {
+    a = hsl.a;
+    h = hsl.h;
+    s = hsl.s;
+    l = hsl.l;
+  }
+
+  bool get isDark => brightness < 128.0;
+
+  bool get isLight => !this.isDark;
+
+  double get brightness => toRgb.brightness;
+
+  void brighten({num percent = 10}) {
+    assignRgb(toRgb..brighten(percent: percent));
+  }
+
+  void lighten({num percent = 10}) {
+    l = (l + percent).clamp(sMin, sMax);
+  }
+
+  void darken({num percent = 10}) {
+    l = (l - percent).clamp(sMin, sMax);
+  }
+
+  void desaturate({num percent = 10}) {
+    s = (s - percent).clamp(sMin, sMax);
+  }
+
+  void saturate({num percent = 10}) {
+    s = (s + percent).clamp(sMin, sMax);
+  }
+
+  void greyscale() {
+    s = 0;
+  }
+
+  void spin(num degrees) {
+    final hue = (h + degrees) % 360;
+    h = hue < 0 ? 360 + hue : hue;
+  }
+
+  void complement() {
+    h = (h + 180) % 360;
+  }
+
+  void mix(Color withColor, {num percent = 50}) {
+    assignRgb(toRgb..mix(withColor, percent: percent));
+  }
+
+  void tint({num percent = 10}) {
+    this.mix(Rgb.white, percent: percent);
+  }
+
+  void shade({num percent = 10}) {
+    this.mix(Rgb.black, percent: percent);
+  }
+
+  Hsl get clone => Hsl(h: h, s: s, l: l, a: a);
+
   Rgb get toRgb {
     List<num> rgb = [0, 0, 0];
 
@@ -113,6 +178,8 @@ class Hsl implements Color {
   }
 
   Hsl get toHsl => Hsl(h: h, s: s, l: l);
+
+  Hsv get toHsv => toRgb.toHsv;
 
   String get css {
     return 'hsl(${shortenDouble(h)}, ${shortenDouble(s)}%, ${shortenDouble(l)}%, ${shortenDouble(a)})';

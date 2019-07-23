@@ -1,7 +1,8 @@
 # lib_colors
 
-Add colors to your applications. LibColors is a cross-platform Dart library to create, use, convert and 
-manipulate colors.
+Add colors to your applications!
+
+LibColors is a cross-platform Dart library to create, use, convert and manipulate colors.
 
 # Example
 

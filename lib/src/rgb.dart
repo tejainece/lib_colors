@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:lib_colors/src/hsv.dart';
 import 'package:lib_colors/src/utils/num.dart';
 
 import 'lib_colors.dart';
@@ -53,6 +54,10 @@ class Rgb implements Color {
     throw FormatException("Invalid value!");
   }
 
+  static final white = Rgb(r: 255, g: 255, b: 255);
+
+  static final black = Rgb(r: 0, g: 0, b: 0);
+
   int get r => _r;
 
   int get g => _g;
@@ -79,6 +84,79 @@ class Rgb implements Color {
   set a(num v) {
     if (v < 0 || v > 1.0) throw ArgumentError.value(v);
     _a = v.toDouble();
+  }
+
+  Rgb get clone => Rgb(r: r, g: g, b: b, a: a);
+
+  void assignRgb(Rgb rgb) {
+    this.r = rgb.r;
+    this.g = rgb.g;
+    this.b = rgb.b;
+    this.a = rgb.a;
+  }
+
+  void assignHsl(Hsl hsl) {
+    assignRgb(hsl.toRgb);
+  }
+
+  double get brightness => (r * 299 + g * 587 + b * 114) / 1000;
+
+  bool get isDark => brightness < 128.0;
+
+  bool get isLight => !this.isDark;
+
+  void brighten({num percent = 10}) {
+    final term = (-(255 * percent / 100)).round();
+
+    r = max(0, min(255, r - term));
+    g = max(0, min(255, g - term));
+    b = max(0, min(255, b - term));
+  }
+
+  void lighten({num percent = 10}) {
+    assignHsl(toHsl..lighten(percent: percent));
+  }
+
+  void darken({num percent = 10}) {
+    assignHsl(toHsl..darken(percent: percent));
+  }
+
+  void mix(Color withColor, {num percent = 50}) {
+    final int p = (percent / 100).round();
+
+    final withRgb = withColor.toRgb;
+    a = (withRgb.a - a) * p + a;
+    r = (withRgb.r - r) * p + r;
+    g = (withRgb.g - g) * p + g;
+    b = (withRgb.b - b) * p + b;
+  }
+
+  void tint({num percent = 10}) {
+    this.mix(white, percent: percent);
+  }
+
+  void shade({num percent = 10}) {
+    this.mix(black, percent: percent);
+  }
+
+  void desaturate({num percent = 10}) {
+    assignHsl(toHsl..desaturate(percent: percent));
+  }
+
+  void saturate({num percent = 10}) {
+    assignHsl(toHsl..saturate(percent: percent));
+  }
+
+  void greyscale() {
+    assignHsl(toHsl..s = 0);
+  }
+
+  void spin(num degree) {
+    assignHsl(toHsl..spin(degree));
+  }
+
+  void complement() {
+    assignHsl(toHsl..complement());
   }
 
   Rgb get toRgb => Rgb(r: r, g: g, b: b, a: a);
@@ -115,6 +193,29 @@ class Rgb implements Color {
     }
 
     return Hsl(h: hue, s: saturation * 100, l: luminance * 100, a: a);
+  }
+
+  Hsv get toHsv {
+    final int max_ = max(max(r, g), b);
+    final int min_ = min(min(r, g), b);
+    final int d = max_ - min_;
+    final int v = max_;
+    final double s = max_ == 0 ? 0 : d / max_;
+    double h = 0.0;
+
+    if (max_ != min_) {
+      if (max_ == r) {
+        h = (g - b) / d + (g < b ? 6.0 : 0.0);
+      } else if (max_ == g) {
+        h = (b - r) / d + 2.0;
+      } else {
+        h = (r - g) / d + 4.0;
+      }
+
+      h /= 6.0;
+    }
+
+    return Hsv(h: h, s: s, v: v, a: a);
   }
 
   String get css => 'rgba($r, $g, $b, ${shortenDouble(a)})';

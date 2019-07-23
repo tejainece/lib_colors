@@ -1,3 +1,4 @@
+import 'dart:math';
 
 /// Skips fraction part for whole number
 String shortenDouble(double v) {
