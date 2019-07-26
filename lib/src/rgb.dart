@@ -54,10 +54,6 @@ class Rgb implements Color {
     throw FormatException("Invalid value!");
   }
 
-  static final white = Rgb(r: 255, g: 255, b: 255);
-
-  static final black = Rgb(r: 0, g: 0, b: 0);
-
   int get r => _r;
 
   int get g => _g;
@@ -86,7 +82,8 @@ class Rgb implements Color {
     _a = v.toDouble();
   }
 
-  Rgb get clone => Rgb(r: r, g: g, b: b, a: a);
+  Rgb clone({int r, int g, int b, num a}) =>
+      Rgb(r: r ?? this.r, g: g ?? this.g, b: b ?? this.b, a: a ?? this.a);
 
   void assignRgb(Rgb rgb) {
     this.r = rgb.r;

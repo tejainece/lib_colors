@@ -128,14 +128,15 @@ class Hsl implements Color {
   }
 
   void tint({num percent = 10}) {
-    this.mix(Rgb.white, percent: percent);
+    this.mix(white, percent: percent);
   }
 
   void shade({num percent = 10}) {
-    this.mix(Rgb.black, percent: percent);
+    this.mix(black, percent: percent);
   }
 
-  Hsl get clone => Hsl(h: h, s: s, l: l, a: a);
+  Hsl clone({num h, num s, num l, num a}) =>
+      Hsl(h: h ?? this.h, s: s ?? this.s, l: l ?? this.l, a: a ?? this.a);
 
   Rgb get toRgb {
     List<num> rgb = [0, 0, 0];

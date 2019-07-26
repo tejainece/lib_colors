@@ -1,3 +1,20 @@
+## 1.0.5
+
+- `clone` method with mods
+
+## 1.0.4
+
+- Exported `white` and `black` colors
+
+## 1.0.2
+
+- Export color spaces
+
+## 1.0.1
+
+- Color manipulation methods
+- Hsv
+
 ## 1.0.0
 
 - Rgb, Hsl

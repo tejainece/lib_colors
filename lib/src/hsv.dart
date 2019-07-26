@@ -63,7 +63,8 @@ class Hsv implements Color {
     v = hsl.v;
   }
 
-  Hsv get clone => Hsv(h: h, s: s, v: v, a: a);
+  Hsv clone({num h, num s, num v, num a}) =>
+      Hsv(h: h ?? this.h, s: s ?? this.s, v: v ?? this.v, a: a ?? this.a);
 
   bool get isDark => brightness < 128.0;
 
@@ -114,11 +115,11 @@ class Hsv implements Color {
   }
 
   void tint({num percent = 10}) {
-    this.mix(Rgb.white, percent: percent);
+    this.mix(white, percent: percent);
   }
 
   void shade({num percent = 10}) {
-    this.mix(Rgb.black, percent: percent);
+    this.mix(black, percent: percent);
   }
 
   Rgb get toRgb {
@@ -153,6 +154,8 @@ class Hsv implements Color {
 
     return rgb;
   }
+
+  Hsv get toHsv => toRgb.toHsv;
 
   Hsl get toHsl => toRgb.toHsl;
 
