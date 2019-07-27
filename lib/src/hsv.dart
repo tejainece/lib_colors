@@ -155,7 +155,7 @@ class Hsv implements Color {
     return rgb;
   }
 
-  Hsv get toHsv => toRgb.toHsv;
+  Hsv get toHsv => clone();
 
   Hsl get toHsl => toRgb.toHsl;
 

@@ -1,3 +1,9 @@
+## 1.0.8
+
+### Bug fix
+
++ Alpha missed on Hsl.toHsl
+
 ## 1.0.6
 
 - Default s, l values for `Hsl`

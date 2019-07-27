@@ -156,7 +156,7 @@ class Rgb implements Color {
     assignHsl(toHsl..complement());
   }
 
-  Rgb get toRgb => Rgb(r: r, g: g, b: b, a: a);
+  Rgb get toRgb => clone();
 
   Hsl get toHsl {
     num rf = r / 255;

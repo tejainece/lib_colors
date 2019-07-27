@@ -178,7 +178,7 @@ class Hsl implements Color {
     return Rgb(r: rgb[0], g: rgb[1], b: rgb[2], a: a);
   }
 
-  Hsl get toHsl => Hsl(h: h, s: s, l: l);
+  Hsl get toHsl => clone();
 
   Hsv get toHsv => toRgb.toHsv;
 
