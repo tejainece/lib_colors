@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Default s, l values for `Hsl`
+
 ## 1.0.5
 
 - `clone` method with mods

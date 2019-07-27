@@ -13,7 +13,7 @@ class Hsl implements Color {
 
   double _a;
 
-  Hsl({num h = 0, num s = 0, num l = 0, num a = 1.0}) {
+  Hsl({num h = 0, num s = sMax, num l = 50, num a = 1.0}) {
     this.h = h;
     this.s = s;
     this.l = l;
