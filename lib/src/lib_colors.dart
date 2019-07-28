@@ -60,6 +60,8 @@ abstract class Color {
 
   void complement();
 
+  double a;
+
   Rgb get toRgb;
 
   Hsl get toHsl;

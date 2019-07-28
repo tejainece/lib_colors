@@ -11,13 +11,14 @@ void main() {
           'rgba(100, 100, 100, 0.5)');
       expect(
           Rgb.parse('rgba(100, 100, 100, .5)').css, 'rgba(100, 100, 100, 0.5)');
-      expect(
-          Rgb.parse('rgba(100, 100, 100, 1)').css, 'rgba(100, 100, 100, 1)');
+      expect(Rgb.parse('rgba(100, 100, 100, 1)').css, 'rgba(100, 100, 100, 1)');
     });
   });
-  group('Parse', () {
-    test('First Test', () {
+  group('Hsl', () {
+    test('Parse', () {
       expect(Hsl.parse('hsl(100, 99%, 50%)').css, 'hsl(100, 99%, 50%, 1)');
+      expect(Hsl.parse('hsl(120, 100%, 50%, 0.5)').css,
+          'hsl(120, 100%, 50%, 0.5)');
     });
   });
 }

@@ -1,3 +1,13 @@
+## 1.0.14
+
++ `a` getter and setter in `Color` interface
+
+## 1.0.12
+
+### Bug fixes
+
++ `Hsl.parse` with alpha
+
 ## 1.0.10
 
 + `HexColorCodec` and `Rgb.fromHex`
