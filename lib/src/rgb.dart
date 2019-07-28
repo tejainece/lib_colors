@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:lib_colors/src/hsv.dart';
+import 'package:lib_colors/src/utils/hex.dart';
 import 'package:lib_colors/src/utils/num.dart';
 
 import 'lib_colors.dart';
@@ -53,6 +54,8 @@ class Rgb implements Color {
 
     throw FormatException("Invalid value!");
   }
+
+  factory Rgb.fromHex(String hex) => HexColorCodec.decode(hex);
 
   int get r => _r;
 
@@ -218,27 +221,7 @@ class Rgb implements Color {
   String get css => 'rgba($r, $g, $b, ${shortenDouble(a)})';
 
   String hex({bool shorten = true, bool withAlpha = true}) {
-    int a = (this.a * 255).floor();
-
-    final bool isShort = shorten &&
-        ((r >> 4) == (r & 0xF)) &&
-        ((g >> 4) == (g & 0xF)) &&
-        ((b >> 4) == (b & 0xF)) &&
-        (!withAlpha || (a >> 4) == (a & 0xF));
-
-    if (isShort) {
-      final String rgb = (r & 0xF).toRadixString(16) +
-          (g & 0xF).toRadixString(16) +
-          (b & 0xF).toRadixString(16);
-
-      return "#$rgb" + (withAlpha ? (a & 0xF).toRadixString(16) : "");
-    } else {
-      final String rgb = r.toRadixString(16).padLeft(2, '0') +
-          g.toRadixString(16).padLeft(2, '0') +
-          b.toRadixString(16).padLeft(2, '0');
-
-      return "#$rgb" + (withAlpha ? a.toRadixString(16).padLeft(2, '0') : "");
-    }
+    return HexColorCodec.encode(this, shorten: shorten, withAlpha: withAlpha);
   }
 
   String toString() => css;

@@ -1,6 +1,7 @@
 import 'package:lib_colors/src/hsl.dart';
 import 'package:lib_colors/src/rgb.dart';
 import 'package:lib_colors/src/hsv.dart';
+import 'package:lib_colors/src/utils/hex.dart';
 
 export 'package:lib_colors/src/hsl.dart';
 export 'package:lib_colors/src/rgb.dart';
@@ -8,12 +9,11 @@ export 'package:lib_colors/src/hsv.dart';
 
 abstract class Color {
   static Color parse(String css) {
-    if(css.startsWith('#')) {
-      // TODO from hex
-      throw UnimplementedError('Parsing hex colors not implemented yet!');
-    } else if(css.startsWith('rgb')) {
+    if (css.startsWith('#')) {
+      return HexColorCodec.decode(css);
+    } else if (css.startsWith('rgb')) {
       return Rgb.parse(css);
-    } else if(css.startsWith('hsl')) {
+    } else if (css.startsWith('hsl')) {
       return Hsl.parse(css);
     }
 

@@ -1,3 +1,7 @@
+## 1.0.10
+
++ `HexColorCodec` and `Rgb.fromHex`
+
 ## 1.0.9
 
 ### Bug fixes
