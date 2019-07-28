@@ -2,10 +2,12 @@ import 'package:lib_colors/src/hsl.dart';
 import 'package:lib_colors/src/rgb.dart';
 import 'package:lib_colors/src/hsv.dart';
 import 'package:lib_colors/src/utils/hex.dart';
+import 'package:lib_colors/src/utils/names.dart';
 
 export 'package:lib_colors/src/hsl.dart';
 export 'package:lib_colors/src/rgb.dart';
 export 'package:lib_colors/src/hsv.dart';
+export 'package:lib_colors/src/utils/names.dart';
 
 abstract class Color {
   static Color parse(String css) {
@@ -15,6 +17,11 @@ abstract class Color {
       return Rgb.parse(css);
     } else if (css.startsWith('hsl')) {
       return Hsl.parse(css);
+    }
+
+    {
+      final ret = NamedColors.decode(css);
+      if (ret != null) return ret;
     }
 
     throw FormatException('Unknown CSS color format!');
@@ -68,13 +75,3 @@ abstract class Color {
 
   Hsv get toHsv;
 }
-
-Rgb get black => Rgb();
-
-Rgb get white => Rgb(r: 255, g: 255, b: 255);
-
-Rgb get lime => Rgb(g: 255);
-
-Rgb get green => Rgb(g: 128);
-
-Rgb get DarkGreen => Rgb(g: 100);

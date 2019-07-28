@@ -52,10 +52,29 @@ class Rgb implements Color {
       return Rgb(r: r, g: g, b: b);
     }
 
+    {
+      final ret = NamedColors.decode(css);
+      if (ret != null) return ret;
+    }
+
     throw FormatException("Invalid value!");
   }
 
   factory Rgb.fromHex(String hex) => HexColorCodec.decode(hex);
+
+  factory Rgb.fromCssName(String name) {
+    final ret = NamedColors.decode(name);
+    if (ret == null) throw FormatException('Unknown color name $name');
+    return ret;
+  }
+
+  factory Rgb.fromInt(int color) {
+    double a = (color & 0xFF) / 0xFF;
+    int b = (color >> 8) & 0xFF;
+    int g = (color >> 16) & 0xFF;
+    int r = (color >> 24) & 0xFF;
+    return Rgb(r: r, g: g, b: b, a: a);
+  }
 
   int get r => _r;
 

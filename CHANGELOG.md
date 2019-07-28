@@ -1,3 +1,13 @@
+## 1.0.16
+
++ CSS named colors
++ `Rgb.fromInt`
++ `Rgb.fromCSSName`
+
+## 1.0.15
+
++ pub.dev fixes
+
 ## 1.0.14
 
 + `a` getter and setter in `Color` interface

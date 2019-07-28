@@ -46,7 +46,8 @@ abstract class HexColorCodec {
     throw FormatException('Invalid hex color: $value');
   }
 
-  static String encode(Color color, {bool shorten = true, bool withAlpha = true}) {
+  static String encode(Color color,
+      {bool shorten = true, bool withAlpha = true}) {
     final rgb = color.toRgb;
 
     int alpha = (rgb.a * 255).floor();
