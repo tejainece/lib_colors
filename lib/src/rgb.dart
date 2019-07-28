@@ -231,13 +231,13 @@ class Rgb implements Color {
           (g & 0xF).toRadixString(16) +
           (b & 0xF).toRadixString(16);
 
-      return withAlpha ? (a & 0xF).toRadixString(16) + rgb : rgb;
+      return "#$rgb" + (withAlpha ? (a & 0xF).toRadixString(16) : "");
     } else {
       final String rgb = r.toRadixString(16).padLeft(2, '0') +
           g.toRadixString(16).padLeft(2, '0') +
           b.toRadixString(16).padLeft(2, '0');
 
-      return withAlpha ? a.toRadixString(16).padLeft(2, '0') + rgb : rgb;
+      return "#$rgb" + (withAlpha ? a.toRadixString(16).padLeft(2, '0') : "");
     }
   }
 

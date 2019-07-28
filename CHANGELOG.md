@@ -1,3 +1,9 @@
+## 1.0.9
+
+### Bug fixes
+
++ `Rgb.toHex`
+
 ## 1.0.8
 
 ### Bug fix
