@@ -1,3 +1,7 @@
+## 1.0.17
+
++ `transparent` in `NamedColors.decode`
+
 ## 1.0.16
 
 + CSS named colors

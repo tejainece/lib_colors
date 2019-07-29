@@ -150,6 +150,7 @@ abstract class NamedColors {
         'whitesmoke': whitesmoke,
         'yellow': yellow,
         'yellowgreen': yellowgreen,
+        'transparent': transparent,
       }[name.toLowerCase()];
 }
 
